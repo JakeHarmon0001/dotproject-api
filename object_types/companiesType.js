@@ -11,6 +11,7 @@ const {
 } = graphql;
 //const {graphqlHTTP} = require('express-graphql')
 const { STRING } = require("sequelize");
+
 const { TINYINT } = require("sequelize");
 const { TEXT } = require("sequelize");
 const { DATE } = require("sequelize");
@@ -27,11 +28,22 @@ const User = db.sequelize.define("User", {
   birthday: DataTypes.DATE,
 });
 
-const companies = db.sequelize.define(
-  "companies",
-  {
-    //company object type
+const CompanyType = new GraphQLObjectType({ //company object type
+  name: "Company",
+  fields: () => ({
+      compId: {type: GraphQLString},
+      name: {type: GraphQLString},
+      email: {type: GraphQLString},
+      owner: {type: GraphQLString},
+      phoneNumber: {type: GraphQLString},
+      location: {type: GraphQLString}
+  })
+})
 
+const companiestype = new GraphQLObjectType({
+  name: "companies",
+  fields: () => ({
+    //company object type
     company_id: { type: INTEGER, primaryKey: true },
     company_module: { type: INTEGER },
     name: { type: STRING },
@@ -128,14 +140,13 @@ const companies = db.sequelize.define(
     company_ppr: { type: STRING },
     company_custyp: { type: STRING },
     company_reseller: { type: INTEGER },
-  },
-  { tableName: "companies" }
-);
+  })
+})
 
 //companies.findAll({where:args})
-const companiesbackup = db.sequelize.define(
-  "companies-backup",
-  {
+const companiesbackuptype = new GraphQLObjectType({
+  name: "companiesbackup",
+  fields: () => ({
     //company object type
 
     company_id: { type: INTEGER, primaryKey: true },
@@ -234,10 +245,8 @@ const companiesbackup = db.sequelize.define(
     company_ppr: { type: STRING },
     company_custyp: { type: STRING },
     company_reseller: { type: INTEGER },
-  },
-  { tableName: "companies-backup" }
-);
-
+  })
+})
 const companiesbackup2 = db.sequelize.define(
   "companies-backup",
   {
@@ -343,70 +352,62 @@ const companiesbackup2 = db.sequelize.define(
   { tableName: "companies-backup2" }
 );
 
-const company_additional = db.sequelize.define(
-  "company_additional",
-  {
+const company_additionaltype =  new GraphQLObjectType({
+  name: "company_additional",
+  fields: () => ({
     add_company_id: { type: INTEGER, primaryKey: true },
     add_item_type: { type: INTEGER, primaryKey: true },
     add_item_value: { type: STRING },
-  },
-  { tableName: "company_additional" }
-);
-
-const company_advn = db.sequelize.define(
-  "company_advn",
-  {
+  })
+})
+const company_advntype = new GraphQLObjectType({
+  name: "company_advn",
+  fields: () => ({
     advn_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     advn_company_id: { type: INTEGER },
     advn_guid: { type: STRING },
-  },
-  { tableName: "company_advn" }
-);
+  })
+})
 
-const company_advn_backup = db.sequelize.define(
-  "company_advn_backup",
-  {
+const company_advn_backuptype = new GraphQLObjectType({
+  name: "company_advn_backup",
+  fields: () => ({
     advn_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     advn_company_id: { type: INTEGER },
     advn_guid: { type: STRING },
-  },
-  { tableName: "company_advn_backup" }
-);
-
-const company_allview = db.sequelize.define(
-  "company_allview",
-  {
+  })
+})
+const company_allviewtype = new GraphQLObjectType({
+  name: "company_allview",
+  fields: () => ({
     allview_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     allview_company_id: { type: INTEGER },
     allview_uid: { type: STRING },
-  },
-  { tableName: "company_allview" }
-);
+  })
+})
 
-const company_assigned_field_tech = db.sequelize.define(
-  "company_assigned_field_tech",
-  {
+const company_assigned_field_techtype = new GraphQLObjectType({
+  name: "company_assigned_field_tech",
+  fields: () => ({
     ft_id: { type: INTEGER },
     company_id: { type: INTEGER, primaryKey: true },
     primary_tech: { type: TINYINT, primaryKey: true },
-  },
-  { tableName: "company_assigned_field_tech" }
-);
+  })
+})
 
-const company_city = db.sequelize.define(
-  "company_city",
-  {
+const company_citytype = new GraphQLObjectType({
+  name: "company_city",
+  fields: () => ({
     company_city_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     company_city_ccc: { type: STRING },
     company_city_name: { type: STRING },
     company_city_sound: { type: STRING },
-  },
-  { tableName: "company_city" }
-);
+  })
+})
 
-const company_field_techs = db.sequelize.define(
-  "company_field_techs",
-  {
+const company_field_techstype = new GraphQLObjectType({
+  name: "company_city_techs",
+  fields: () => ({
     ft_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     ft_company_name: { type: STRING },
     ft_company_number: { type: STRING },
@@ -419,13 +420,12 @@ const company_field_techs = db.sequelize.define(
     ft_hourly_rate_weekday: { type: DECIMAL },
     ft_hourly_rate_weekend: { type: DECIMAL },
     ft_notes: { type: STRING },
-  },
-  { tableName: "company_field_techs" }
-);
+  })
+})
 
-const company_flag = db.sequelize.define(
-  "company_flags",
-  {
+const company_flagtype = new GraphQLObjectType({
+  name: "company_flag",
+  fields: () => ({
     company_flag_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     company_flag_nnn: { type: STRING },
     company_flag_name: { type: STRING },
@@ -437,26 +437,24 @@ const company_flag = db.sequelize.define(
     company_flag_ad: { type: STRING },
     company_flag_css: { type: STRING },
     company_flag_terms: { type: STRING },
-  },
-  { tableName: "company_flag" }
-);
+  })
+})
 
-const company_franchisor = db.sequelize.define(
-  "company_franchisor",
-  {
+const company_franchisortype = new GraphQLObjectType({
+  name: "company_franchisor",
+  fields: () => ({
     company_franchisor_id: {
       type: INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     company_franchisor_name: { type: STRING },
-  },
-  { tableName: "company_franchisor" }
-);
+  })
+})
 
-const company_liscenses = db.sequelize.define(
-  "company_liscenses",
-  {
+const company_liscensestype = new GraphQLObjectType({
+  name: "company_liscenses",
+  fields: () => ({
     licenses_id: {
       type: INTEGER,
       unique: true,
@@ -468,11 +466,11 @@ const company_liscenses = db.sequelize.define(
     purchase_date: { type: DATE },
     start_date: { type: DATE },
     licenses_months: { type: INTEGER, unique: true },
-  },
-  { tableName: "company_liscenses" }
-);
-
-const company_lock = db.sequelize.define("company_lock", {
+  })
+})
+const company_locktype = new GraphQLObjectType({
+  name: "company_lock",
+  fields: () => ({
   id: { type: INTEGER, autoIncrement: true, primaryKey: true },
   company_id: { type: INTEGER },
   lockedFlag: { type: TINYINT },
@@ -480,57 +478,50 @@ const company_lock = db.sequelize.define("company_lock", {
   lockedMessage: { type: STRING },
   createdAt: { type: STRING },
   modifiedAt: { type: STRING },
-});
-
-const company_phone = db.sequelize.define(
-  "company_phone",
-  {
+})
+})
+const company_phonetype = new GraphQLObjectType({
+  name: "company_phone",
+  fields: () => ({
     cphone_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
     cphone_number: { type: INTEGER },
     cphone_company: { type: INTEGER },
     cphone_type: { type: INTEGER },
-  },
-  { tableName: "company_phone" }
-);
+  })
+})
 
-const company_reseller = db.sequelize.define(
-  "company_reseller",
-  {
+const company_resellertype = new GraphQLObjectType({
+  name: "company_reseller",
+  fields: () => ({
     reseller_id: { type: INTEGER, primaryKey: true },
     reseller_name: { type: STRING },
     reseller_phone: { type: STRING },
     reseller_email: { type: STRING },
-  },
-  { tableName: "company_reseller" }
-);
+  })
+})
 
-const company_states = db.sequelize.define(
-  "company_states",
-  {
+const company_statestype = new GraphQLObjectType({
+  name: "company_states",
+  fields: () => ({
     company_state_id: { type: STRING },
     company_state_name: { type: STRING },
     company_state_sound: { type: STRING },
-  },
-  { tableName: "company_states" }
-);
-
-const company_states_am = db.sequelize.define(
-  "company_states_am",
-  {
+  })
+})
+const company_states_amtype = new GraphQLObjectType({
+  name: "company_states_am",
+  fields: () => ({
     company_state_id: { type: STRING },
     company_state_am: { type: INTEGER },
-  },
-  { tableName: "company_states_am" }
-);
-
-const company_tags = db.sequelize.define(
-  "company_tags",
-  {
+  })
+})
+const company_tagstype = new GraphQLObjectType({
+  name: "company_tags",
+  fields: () => ({
     company_id: { type: INTEGER, primaryKey: true },
     contact_id: { type: INTEGER, primaryKey: true },
-  },
-  { tableName: "company_tags" }
-);
+  })
+})
 
 //const companiess = await companies.findAll( )
 //console.log(companies.findAll())

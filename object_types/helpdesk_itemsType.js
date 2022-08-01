@@ -14,7 +14,9 @@ import { Sequelize, Model, DataTypes } from 'sequelize';
 
 //const sequelize = new Sequelize('sqlite::memory:');
 
-const helpdesk_items = db.define('helpdesk_items', {
+const helpdesk_itemstype = new GraphQLObjectType({
+    name: "helpdesk_items",
+    fields: () => ({
 
     item_id: {type: INTEGER, unique: true, autoIncrement: true, primaryKey: true},
     item_title: {type: STRING},
@@ -63,15 +65,20 @@ const helpdesk_items = db.define('helpdesk_items', {
     item_newdb: {type: INTEGER}
     
 })
+})
 
-
-const helpdesk_items_additional = db.define('helpdesk_items_additional', {
+const helpdesk_items_additionaltype = new GraphQLObjectType({
+    name: "helpdesk_items_additional",
+    fields: () => ({
     add_item_id: {type: INTEGER, primaryKey: true},
     add_item_type: {type: INTEGER, primaryKey:true},
     add_item_value: {type: STRING}
 })
+})
 
-const helpdesk_items_archive = db.define('helpdesk_items_archive', {
+const helpdesk_items_archivetype = new GraphQLObjectType({
+    name: "helpdesk_itemes_archive",
+    fields: () => ({
     item_id: {type: INTEGER, unique: true, autoIncrement: true, primaryKey: true},
     item_title: {type: STRING},
     item_summary: {type: TEXT},
@@ -118,8 +125,11 @@ const helpdesk_items_archive = db.define('helpdesk_items_archive', {
     item_zabbix: {type: INTEGER},
     item_newdb: {type: INTEGER}
 })
+})
 
-const helpdesk_items_attach = db.define('helpdesk_items_attach', {
+const helpdesk_items_attachtype = new GraphQLObjectType({
+    name: "helpdesk_items_attach",
+    fields: () => ({
     attach_id: {type: INTEGER, autoIncrement: true, primaryKey: true},
     attach_type: {type: INTEGER},
     attach_attached_id: {type: INTEGER},
@@ -129,8 +139,11 @@ const helpdesk_items_attach = db.define('helpdesk_items_attach', {
     attach_attached_by: {type: STRING},
     attach_note: {type: TEXT}
 })
+})
 
-const helpdesk_items_backup = db.define('helpdesk_items_backup', {
+const helpdesk_items_backuptype = new GraphQLObjectType({
+    name: "helpdesk_items_backup",
+    fields: () => ({
 
     item_id: {type: INTEGER, unique: true, autoIncrement: true, primaryKey: true},
     item_title: {type: STRING},
@@ -178,8 +191,11 @@ const helpdesk_items_backup = db.define('helpdesk_items_backup', {
     item_zabbix: {type: INTEGER}
     
 })
+})
 
-const helpdesk_item_status = db.define('helpdesk_item_status', {
+const helpdesk_item_statustype = new GraphQLObjectType({
+    name: "helpdesk_item_status",
+    fields: () => ({
     status_id: {type: INTEGER, autoIncrement: true, primaryKey: true},
     status_item_id: {type: INTEGER},
     status_code: {type: TINYINT},
@@ -187,8 +203,11 @@ const helpdesk_item_status = db.define('helpdesk_item_status', {
     status_modified_by: {type: INTEGER},
     status_comment: {type: TEXT}
 })
+})
 
-const helpdesk_item_status_archive = db.define('helpdesk_item_status_archive', {
+const helpdesk_item_status_archivetype = new GraphQLObjectType({
+    name: "helpdesk_item_status_archive",
+    fields: () => ({
     status_id: {type: INTEGER, autoIncrement: true, primaryKey: true},
     status_item_id: {type: INTEGER},
     status_code: {type: TINYINT},
@@ -196,8 +215,11 @@ const helpdesk_item_status_archive = db.define('helpdesk_item_status_archive', {
     status_modified_by: {type: INTEGER},
     status_comment: {type: TEXT}
 })
+})
 
-const helpdesk_item_status_backup = db.define('helpdesk_item_status_backup', {
+const helpdesk_item_status_backuptype = new GraphQLObjectType({
+    name: "helpdesk_item_status_backup",
+    fields: () => ({
     status_id: {type: INTEGER, autoIncrement: true, primaryKey: true},
     status_item_id: {type: INTEGER},
     status_code: {type: TINYINT},
@@ -205,9 +227,12 @@ const helpdesk_item_status_backup = db.define('helpdesk_item_status_backup', {
     status_modified_by: {type: INTEGER},
     status_comment: {type: TEXT}
 })
-
-const helpdesk_item_watchers = db.define('helpdesk_item_watchers', {
+})
+const helpdesk_item_watcherstype = new GraphQLObjectType({
+    name: "helpdesk_item_watchers",
+    fields: () => ({
     item_id: {type: INTEGER},
     user_id: {type: INTEGER},
     notify: {type: CHAR}
+})
 })
