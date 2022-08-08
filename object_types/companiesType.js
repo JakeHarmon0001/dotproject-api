@@ -1,4 +1,4 @@
-const  db  = require("../models/index.js"); //database variable
+const  db  = require("../mysql/db.js"); //database variable
 
 const graphql = require("graphql");
 const {
@@ -19,6 +19,7 @@ const { BIGINT } = require("sequelize");
 const { DECIMAL } = require("sequelize");
 const { INTEGER } = require("sequelize");
 const { Sequelize, Model, DataTypes } = require("sequelize");
+const { TIME } = require("sequelize");
 
 // const sequelize = new Sequelize('sqlite::memory:');
 //companies.findAll({where:args})
@@ -476,8 +477,8 @@ const company_locktype = new GraphQLObjectType({
   lockedFlag: { type: TINYINT },
   lockedUser: { type: INTEGER },
   lockedMessage: { type: STRING },
-  createdAt: { type: STRING },
-  modifiedAt: { type: STRING },
+  createdAt: { type: TIME },
+  modifiedAt: { type: TIME },
 })
 })
 const company_phonetype = new GraphQLObjectType({
@@ -525,4 +526,4 @@ const company_tagstype = new GraphQLObjectType({
 
 //const companiess = await companies.findAll( )
 //console.log(companies.findAll())
-module.exports = { companies };
+module.exports = { companiestype };

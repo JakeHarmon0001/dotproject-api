@@ -1,5 +1,4 @@
-const  db  = require("../models/index.js"); //database variable
-
+const db = require("../mysql/db.js"); //database variable
 const graphql = require("graphql");
 const {
   GraphQLObjectType,
@@ -9,7 +8,7 @@ const {
   GraphQL,
   GraphQLList,
 } = graphql;
-//const {graphqlHTTP} = require('express-graphql')
+
 const { STRING } = require("sequelize");
 const { TINYINT } = require("sequelize");
 const { TEXT } = require("sequelize");
@@ -18,25 +17,16 @@ const { BIGINT } = require("sequelize");
 const { DECIMAL } = require("sequelize");
 const { INTEGER } = require("sequelize");
 const { Sequelize, Model, DataTypes } = require("sequelize");
-
-// const sequelize = new Sequelize('sqlite::memory:');
-//companies.findAll({where:args})
-
-const User = db.sequelize.define("User", {
-  username: DataTypes.STRING,
-  birthday: DataTypes.DATE,
-});
+const { TIME } = require("sequelize");
 
 const companies = db.sequelize.define(
   "companies",
   {
-    //company object type
-
     company_id: { type: INTEGER, primaryKey: true },
     company_module: { type: INTEGER },
-    name: { type: STRING },
-    phone: { type: STRING },
-    phone2: { type: STRING },
+    company_name: { type: STRING },
+    company_phone1: { type: STRING },
+    company_phone2: { type: STRING },
     company_fax: { type: STRING },
     company_address1: { type: STRING },
     company_address2: { type: STRING },
@@ -72,12 +62,12 @@ const companies = db.sequelize.define(
     company_wifi_ssid: { type: STRING },
     company_wifi_login: { type: STRING },
     company_wired: { type: STRING },
-    company_wiried_type: { type: STRING },
+    company_wired_type: { type: STRING },
     company_wired_login: { type: STRING },
     company_circuit_type: { type: STRING },
     company_circuit_provider: { type: STRING },
     company_circuit_speed: { type: STRING },
-    compnay_parent: { type: INTEGER },
+    company_parent: { type: INTEGER },
     company_secondary: { type: INTEGER },
     company_splash: { type: INTEGER },
     company_fac_bcount: { type: INTEGER },
@@ -86,14 +76,14 @@ const companies = db.sequelize.define(
     company_fac_drop: { type: INTEGER },
     company_fac_roomaccess: { type: INTEGER },
     company_fac_hallways: { type: INTEGER },
-    comany_fac_material: { type: INTEGER },
+    company_fac_material: { type: INTEGER },
     company_support_level: { type: INTEGER },
     company_circuit: { type: INTEGER },
     company_circuit_newspeed: { type: INTEGER },
     company_circuit_newtype: { type: INTEGER },
     company_hotspot_config: { type: INTEGER },
     company_rad_type: { type: INTEGER },
-    company_rad_acess: { type: INTEGER },
+    company_rad_access: { type: INTEGER },
     company_rad_ads: { type: INTEGER },
     company_rad_airlock: { type: INTEGER },
     company_rad_register: { type: INTEGER },
@@ -129,20 +119,18 @@ const companies = db.sequelize.define(
     company_custyp: { type: STRING },
     company_reseller: { type: INTEGER },
   },
-  { tableName: "companies" }
-);
+  { tableName: "companies", timestamps: false }
+)
 
-//companies.findAll({where:args})
+
 const companiesbackup = db.sequelize.define(
   "companies-backup",
   {
-    //company object type
-
     company_id: { type: INTEGER, primaryKey: true },
     company_module: { type: INTEGER },
-    name: { type: STRING },
-    phone: { type: STRING },
-    phone2: { type: STRING },
+    company_name: { type: STRING },
+    company_phone1: { type: STRING },
+    company_phone2: { type: STRING },
     company_fax: { type: STRING },
     company_address1: { type: STRING },
     company_address2: { type: STRING },
@@ -178,7 +166,7 @@ const companiesbackup = db.sequelize.define(
     company_wifi_ssid: { type: STRING },
     company_wifi_login: { type: STRING },
     company_wired: { type: STRING },
-    company_wiried_type: { type: STRING },
+    company_wired_type: { type: STRING },
     company_wired_login: { type: STRING },
     company_circuit_type: { type: STRING },
     company_circuit_provider: { type: STRING },
@@ -235,19 +223,19 @@ const companiesbackup = db.sequelize.define(
     company_custyp: { type: STRING },
     company_reseller: { type: INTEGER },
   },
-  { tableName: "companies-backup" }
-);
+  { tableName: "companies-backup", timestamps: false }
+)
 
 const companiesbackup2 = db.sequelize.define(
-  "companies-backup",
+  "companies-backup2",
   {
-    //company object type
+    
 
     company_id: { type: INTEGER, primaryKey: true },
     company_module: { type: INTEGER },
-    name: { type: STRING },
-    phone: { type: STRING },
-    phone2: { type: STRING },
+    company_name: { type: STRING },
+    company_phone1: { type: STRING },
+    company_phone2: { type: STRING },
     company_fax: { type: STRING },
     company_address1: { type: STRING },
     company_address2: { type: STRING },
@@ -283,7 +271,7 @@ const companiesbackup2 = db.sequelize.define(
     company_wifi_ssid: { type: STRING },
     company_wifi_login: { type: STRING },
     company_wired: { type: STRING },
-    company_wiried_type: { type: STRING },
+    company_wired_type: { type: STRING },
     company_wired_login: { type: STRING },
     company_circuit_type: { type: STRING },
     company_circuit_provider: { type: STRING },
@@ -340,8 +328,8 @@ const companiesbackup2 = db.sequelize.define(
     company_custyp: { type: STRING },
     company_reseller: { type: INTEGER },
   },
-  { tableName: "companies-backup2" }
-);
+  { tableName: "companies-backup2", timestamps: false }
+)
 
 const company_additional = db.sequelize.define(
   "company_additional",
@@ -350,8 +338,8 @@ const company_additional = db.sequelize.define(
     add_item_type: { type: INTEGER, primaryKey: true },
     add_item_value: { type: STRING },
   },
-  { tableName: "company_additional" }
-);
+  { tableName: "company_additional", timestamps: false }
+)
 
 const company_advn = db.sequelize.define(
   "company_advn",
@@ -360,8 +348,8 @@ const company_advn = db.sequelize.define(
     advn_company_id: { type: INTEGER },
     advn_guid: { type: STRING },
   },
-  { tableName: "company_advn" }
-);
+  { tableName: "company_advn", timestamps: false }
+)
 
 const company_advn_backup = db.sequelize.define(
   "company_advn_backup",
@@ -370,8 +358,8 @@ const company_advn_backup = db.sequelize.define(
     advn_company_id: { type: INTEGER },
     advn_guid: { type: STRING },
   },
-  { tableName: "company_advn_backup" }
-);
+  { tableName: "company_advn_backup", timestamps: false }
+)
 
 const company_allview = db.sequelize.define(
   "company_allview",
@@ -380,8 +368,8 @@ const company_allview = db.sequelize.define(
     allview_company_id: { type: INTEGER },
     allview_uid: { type: STRING },
   },
-  { tableName: "company_allview" }
-);
+  { tableName: "company_allview", timestamps: false }
+)
 
 const company_assigned_field_tech = db.sequelize.define(
   "company_assigned_field_tech",
@@ -390,8 +378,8 @@ const company_assigned_field_tech = db.sequelize.define(
     company_id: { type: INTEGER, primaryKey: true },
     primary_tech: { type: TINYINT, primaryKey: true },
   },
-  { tableName: "company_assigned_field_tech" }
-);
+  { tableName: "company_assigned_field_tech", timestamps: false }
+)
 
 const company_city = db.sequelize.define(
   "company_city",
@@ -401,8 +389,8 @@ const company_city = db.sequelize.define(
     company_city_name: { type: STRING },
     company_city_sound: { type: STRING },
   },
-  { tableName: "company_city" }
-);
+  { tableName: "company_city", timestamps: false }
+)
 
 const company_field_techs = db.sequelize.define(
   "company_field_techs",
@@ -420,8 +408,8 @@ const company_field_techs = db.sequelize.define(
     ft_hourly_rate_weekend: { type: DECIMAL },
     ft_notes: { type: STRING },
   },
-  { tableName: "company_field_techs" }
-);
+  { tableName: "company_field_techs", timestamps: false }
+)
 
 const company_flag = db.sequelize.define(
   "company_flags",
@@ -438,8 +426,8 @@ const company_flag = db.sequelize.define(
     company_flag_css: { type: STRING },
     company_flag_terms: { type: STRING },
   },
-  { tableName: "company_flag" }
-);
+  { tableName: "company_flag", timestamps: false }
+)
 
 const company_franchisor = db.sequelize.define(
   "company_franchisor",
@@ -451,8 +439,8 @@ const company_franchisor = db.sequelize.define(
     },
     company_franchisor_name: { type: STRING },
   },
-  { tableName: "company_franchisor" }
-);
+  { tableName: "company_franchisor", timestamps: false }
+)
 
 const company_liscenses = db.sequelize.define(
   "company_liscenses",
@@ -469,8 +457,8 @@ const company_liscenses = db.sequelize.define(
     start_date: { type: DATE },
     licenses_months: { type: INTEGER, unique: true },
   },
-  { tableName: "company_liscenses" }
-);
+  { tableName: "company_liscenses", timestamps: false }
+)
 
 const company_lock = db.sequelize.define("company_lock", {
   id: { type: INTEGER, autoIncrement: true, primaryKey: true },
@@ -478,9 +466,9 @@ const company_lock = db.sequelize.define("company_lock", {
   lockedFlag: { type: TINYINT },
   lockedUser: { type: INTEGER },
   lockedMessage: { type: STRING },
-  createdAt: { type: STRING },
-  modifiedAt: { type: STRING },
-});
+  createdAt: { type: TIME },
+  modifiedAt: { type: TIME },
+})
 
 const company_phone = db.sequelize.define(
   "company_phone",
@@ -490,8 +478,8 @@ const company_phone = db.sequelize.define(
     cphone_company: { type: INTEGER },
     cphone_type: { type: INTEGER },
   },
-  { tableName: "company_phone" }
-);
+  { tableName: "company_phone", timestamps: false }
+)
 
 const company_reseller = db.sequelize.define(
   "company_reseller",
@@ -501,8 +489,8 @@ const company_reseller = db.sequelize.define(
     reseller_phone: { type: STRING },
     reseller_email: { type: STRING },
   },
-  { tableName: "company_reseller" }
-);
+  { tableName: "company_reseller", timestamps: false }
+)
 
 const company_states = db.sequelize.define(
   "company_states",
@@ -511,8 +499,8 @@ const company_states = db.sequelize.define(
     company_state_name: { type: STRING },
     company_state_sound: { type: STRING },
   },
-  { tableName: "company_states" }
-);
+  { tableName: "company_states", timestamps: false }
+)
 
 const company_states_am = db.sequelize.define(
   "company_states_am",
@@ -520,8 +508,8 @@ const company_states_am = db.sequelize.define(
     company_state_id: { type: STRING },
     company_state_am: { type: INTEGER },
   },
-  { tableName: "company_states_am" }
-);
+  { tableName: "company_states_am", timestamps: false }
+)
 
 const company_tags = db.sequelize.define(
   "company_tags",
@@ -529,9 +517,28 @@ const company_tags = db.sequelize.define(
     company_id: { type: INTEGER, primaryKey: true },
     contact_id: { type: INTEGER, primaryKey: true },
   },
-  { tableName: "company_tags" }
-);
+  { tableName: "company_tags", timestamps: false }
+)
 
-//const companiess = await companies.findAll( )
-//console.log(companies.findAll())
-module.exports = { companies };
+module.exports = {
+  companies,
+  companiesbackup,
+  companiesbackup2,
+  company_additional,
+  company_advn,
+  company_advn_backup,
+  company_allview,
+  company_assigned_field_tech,
+  company_city,
+  company_field_techs,
+  company_flag,
+  company_franchisor,
+  company_liscenses,
+  company_liscenses,
+  company_lock,
+  company_phone,
+  company_reseller,
+  company_states,
+  company_states_am,
+  company_tags,
+}
