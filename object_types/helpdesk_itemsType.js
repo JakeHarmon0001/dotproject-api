@@ -1,3 +1,7 @@
+/**
+ * graphql object types of helpdesk_items/related tables in mysql db
+ */
+
 const db = require("../db.js") //database variable
 const graphql = require('graphql')
 const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString,GraphQL, GraphQLList} = graphql

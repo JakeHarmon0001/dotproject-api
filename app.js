@@ -23,7 +23,7 @@ const {
   company_states,
   company_states_am,
   company_tags,
-} = require("./sequelize_models/companies.js");
+} = require("./models/companies.js");
 const {
   helpdesk_items,
   helpdesk_item_status,
@@ -34,16 +34,18 @@ const {
   helpdesk_items_archive,
   helpdesk_items_attach,
   helpdesk_items_backup,
-} = require("./sequelize_models/helpdesk_items");
-const { schema, schema2 } = require("./schemas/graphql");
-const { SELECT } = require("sequelize");
+} = require("./models/helpdesk_items");
+
+const {schema} = require("./schemas/schema_companies.js") //schema for companies/related querys  
 const server = createServer({
-  schema,
-  schema2,
+  schema
 });
 
-helpdesk_item_status.findAll({}).then(function (helpdesk_item_status) {
-  console.log("select_data: " + JSON.stringify(helpdesk_item_status));
-});
+
+  // company_states.findAll({}).then(function (company_states) {
+  //   console.log("select_data: " + JSON.stringify(company_states));
+  // });
+
 
 server.start();
+
