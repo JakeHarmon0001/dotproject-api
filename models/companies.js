@@ -415,7 +415,7 @@ const company_field_techs = db.sequelize.define(
 )
 
 const company_flag = db.sequelize.define(
-  "company_flags",
+  "company_flag",
   {
     company_flag_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
     company_flag_nnn: { type: STRING },
