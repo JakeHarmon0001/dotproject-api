@@ -25,7 +25,7 @@ const { TIME } = require("sequelize");
 const companies = db.sequelize.define(
   "companies",
   {
-    company_id: { type: INTEGER, primaryKey: true },
+    company_id: { type: INTEGER, primaryKey: true, description: "ID representing existing company" },
     company_module: { type: INTEGER },
     company_name: { type: STRING },
     company_phone1: { type: STRING },

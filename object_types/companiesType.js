@@ -44,28 +44,29 @@ const CompanyType = new GraphQLObjectType({ //company object type
 
 const companiestype = new GraphQLObjectType({
   name: "companies",
+  description: "Represents a company that is a customer of Ovation Networks",
   fields: () => ({
     //company object type
-    company_id: {type: GraphQLString },
+    company_id: {type: GraphQLString, description: "ID representing existing company" },
     company_module: { type: GraphQLInt },
-    company_name: { type: GraphQLString },
-    company_phone: { type: GraphQLString },
-    company_phone2: { type: GraphQLString },
-    company_fax: { type: GraphQLString },
-    company_address1: { type: GraphQLString },
-    company_address2: { type: GraphQLString },
-    company_city: { type: GraphQLString },
+    company_name: { type: GraphQLString, description: "Name of company" },
+    company_phone: { type: GraphQLString, description: "Company phonenumber" },
+    company_phone2: { type: GraphQLString, description: "Backup phonenumber" },
+    company_fax: { type: GraphQLString, description: "Company fax address" },
+    company_address1: { type: GraphQLString, description: "Company address" },
+    company_address2: { type: GraphQLString, description: "Secondary company address" },
+    company_city: { type: GraphQLString, description: "City company is located in" },
     company_citynew: { type: GraphQLString },
-    company_state: { type: GraphQLString },
+    company_state: { type: GraphQLString, description: "State company is located in" },
     company_statenew: { type: GraphQLString },
-    company_zip: { type: GraphQLString },
-    company_flag: { type: GraphQLString },
-    company_primary_url: { type: GraphQLString },
-    company_owner: { type: GraphQLInt },
-    company_accountmanager: { type: GraphQLInt },
-    company_description: { type: GraphQLString },
-    company_type: { type: GraphQLInt },
-    company_email: { type: GraphQLString },
+    company_zip: { type: GraphQLString, description: "Zip code of company" },
+    company_flag: { type: GraphQLString, description: "Flag of company" },
+    company_primary_url: { type: GraphQLString, description: "Primary URL of company" },
+    company_owner: { type: GraphQLInt, description: "Owner of company" },
+    company_accountmanager: { type: GraphQLInt, description: "Account Manager of company" },
+    company_description: { type: GraphQLString, description: "Description of company" },
+    company_type: { type: GraphQLInt, description: "Type of company" },
+    company_email: { type: GraphQLString, description: "Email of company" },
     company_custom: { type: GraphQLString },
     company_modified: { type: GraphQLInt },
     rooms_total: { type: GraphQLInt },
@@ -399,6 +400,7 @@ const company_assigned_field_techtype = new GraphQLObjectType({
 
 const company_citytype = new GraphQLObjectType({
   name: "company_city",
+  description: "Item that represents a city where Ovation Networks has a customer",
   fields: () => ({
     company_city_id: { type: GraphQLInt, primaryKey: true, autoIncrement: true },
     company_city_ccc: { type: GraphQLString },
@@ -427,30 +429,32 @@ const company_field_techstype = new GraphQLObjectType({
 
 const company_flagtype = new GraphQLObjectType({
   name: "company_flag",
+  description: "Flags used by companies working with Ovation Networks",
   fields: () => ({
-    company_flag_id: { type: GraphQLInt, primaryKey: true, autoIncrement: true },
-    company_flag_nnn: { type: GraphQLString },
-    company_flag_name: { type: GraphQLString },
-    company_flag_franchisor: { type: GraphQLInt },
+    company_flag_id: { type: GraphQLInt, primaryKey: true, autoIncrement: true, description: "ID of company flag" },
+    company_flag_nnn: { type: GraphQLString, description: "Three letter code representing the company name"},
+    company_flag_name: { type: GraphQLString, description:"Name of company flag" },
+    company_flag_franchisor: { type: GraphQLInt, },
     company_flag_sound: { type: GraphQLString },
-    company_flag_color: { type: GraphQLString },
-    company_flag_body: { type: GraphQLString },
-    company_flag_body: { type: GraphQLString },
-    company_flag_ad: { type: GraphQLString },
-    company_flag_css: { type: GraphQLString },
-    company_flag_terms: { type: GraphQLString },
+    company_flag_color: { type: GraphQLString, description: "Color of company_flag" },
+    company_flag_body: { type: GraphQLString, description: "A file for the body/background of the company_flag" },
+    company_flag_ad: { type: GraphQLString, description: "Image file representing company_flag" },
+    company_flag_css: { type: GraphQLString, description: "css code representing the company_flag" },
+    company_flag_terms: { type: GraphQLString, description: "Terms of the company_flag, a .txt file" },
   })
 })
 
 const company_franchisortype = new GraphQLObjectType({
   name: "company_franchisor",
+  description: "Represents a franchisor working with ovation networks",
   fields: () => ({
     company_franchisor_id: {
       type: GraphQLInt,
       primaryKey: true,
       autoIncrement: true,
+      description: "ID of franchisor"
     },
-    company_franchisor_name: { type: GraphQLString },
+    company_franchisor_name: { type: GraphQLString, description: "Franchisor name"},
   })
 })
 
@@ -504,9 +508,10 @@ const company_resellertype = new GraphQLObjectType({
 
 const company_statestype = new GraphQLObjectType({
   name: "company_states",
+  description: "A state where Ovation Networks has customers",
   fields: () => ({
-    company_state_id: { type: GraphQLString },
-    company_state_name: { type: GraphQLString },
+    company_state_id: { type: GraphQLString, description: "ID of state" },
+    company_state_name: { type: GraphQLString, description: "Name of state" },
     company_state_sound: { type: GraphQLString },
   })
 })
@@ -520,7 +525,7 @@ const company_states_amtype = new GraphQLObjectType({
 const company_tagstype = new GraphQLObjectType({
   name: "company_tags",
   fields: () => ({
-    company_id: { type: GraphQLInt, primaryKey: true },
+    company_id: { type: GraphQLInt, primaryKey: true , },
     contact_id: { type: GraphQLInt, primaryKey: true },
   })
 })

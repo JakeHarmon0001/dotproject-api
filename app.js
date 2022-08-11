@@ -42,9 +42,9 @@ const server = createServer({
 });
 
 
-  //  company_states.findAll({where: {'company_state_id': 'AK'}}).then(function (company_states) {
-  //    console.log("select_data: " + JSON.stringify(company_states));
-  //  });
+    helpdesk_items.findAll({}).then(function (helpdesk_items) {
+      console.log("select_data: " + JSON.stringify(helpdesk_items));
+    });
 
 
 server.start();

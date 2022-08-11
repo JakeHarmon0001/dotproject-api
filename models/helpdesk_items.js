@@ -86,7 +86,7 @@ const helpdesk_items_additional = db.sequelize.define(
   {
     add_item_id: { type: INTEGER, primaryKey: true },
     add_item_type: { type: INTEGER, primaryKey: true },
-    add_item_value: { type: STRING },
+    add_item_value: { type: STRING }
   },
   { tableName: "helpdesk_items_additional", timestamps: false }
 );
@@ -98,7 +98,7 @@ const helpdesk_items_archive = db.sequelize.define(
       type: INTEGER,
       unique: true,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     item_title: { type: STRING },
     item_summary: { type: TEXT },

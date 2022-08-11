@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
  const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList} = graphql
  //const{graphqlHTTP} = require('express-graphql')
  const {company_statestype, companiestype, company_citytype, company_flagtype, company_franchisortype} = require('../object_types/companiesType')
-
+ const {helpdesk_itemstype} = require("../object_types/helpdesk_itemsType")
  const {
     companies,
     companiesbackup,
@@ -28,9 +28,23 @@ const Sequelize = require('sequelize');
     company_tags,
   } = require("../models/companies.js");
 
+  const {
+    helpdesk_items,
+    helpdesk_item_status,
+    helpdesk_item_status_archive,
+    helpdesk_item_status_backup,
+    helpdesk_item_watchers,
+    helpdesk_items_additional,
+    helpdesk_items_archive,
+    helpdesk_items_attach,
+    helpdesk_items_backup,
+  } = require("../models/helpdesk_items");
+  
+
 
   const RootQuery = new GraphQLObjectType ({
-    name: "RootQueryType",
+    name: "RootQuery",
+    description:"Contains Schema to query information on tables in the dotproject db",
     fields: {
         /**
          * query that returns all company_states db items
@@ -38,18 +52,86 @@ const Sequelize = require('sequelize');
          */
         allcompany_states: {
             type: new GraphQLList(company_statestype),
-            args: { id: {type: GraphQLString}}, 
+            description: "Returns the data on all company_states items in the dotproject db allowing you to filter which fields are returned",
+            args: { }, 
             resolve(parent,args) {
                 return company_states.findAll({})                
             }
         },
+
+        /**
+         * query that returns all companies items in the db
+         * can filter which fields are returned
+         */
+         allcompanies:{
+            type: new GraphQLList(companiestype),
+            description: "Returns the data on all companies items in the dotproject db allowing you to filter which fields are returned",
+            args: { }, 
+            resolve(parent,args) {
+                return companies.findAll({})                
+            }
+        }, 
+
+        /**
+         * query that returns all company_city items in the db
+         * can filter which fields are returned
+         */
+         allcompany_city:{
+            type: new GraphQLList(company_citytype),
+            description: "Returns the data on all company_city items in the dotproject db allowing you to filter which fields are returned",
+            args: { }, 
+            resolve(parent,args) {
+                return company_city.findAll({})                
+            }
+        },
+
+        /**
+         * query that returns all company_flag items in the db
+         * can filter which fields are returned
+         */
+         allcompany_flag:{
+            type: new GraphQLList(company_flagtype),
+            description: "Returns the data on all company_flag items in the dotproject db allowing you to filter which fields are returned",
+            args: { }, 
+            resolve(parent,args) {
+                return company_flag.findAll({})                
+            }
+        },
+
+        /**
+         * query that returns all company_franchisor items in the db
+         * can filter which fields are returned
+         */
+         allcompany_franchisor: {
+            type: new GraphQLList(company_franchisortype),
+            description: "Returns the data on all company_franchisor items in the dotproject db allowing you to filter which fields are returned",
+            args: { }, 
+            resolve(parent,args) {
+                return company_franchisor.findAll({})                
+            }
+        },
+
+        /**
+         * query that returns all company_states db items
+         * can filter which fields are returned
+         */
+         allhelpdesk_items: {
+            type: new GraphQLList(helpdesk_itemstype),
+            description: "Returns the data on all company_states items in the dotproject db allowing you to filter which fields are returned",
+            args: { }, 
+            resolve(parent,args) {
+                return helpdesk_items.findAll({})                
+            }
+        },
+
         /**
          * query that allows client to search company_states items by company_states_name or company_states_id
          * can filter which fields are returned
          */
         company_states: { 
             type: new GraphQLList(company_statestype),
-            args: { company_state_id: {type: GraphQLString}, company_state_name: {type: GraphQLString}}, //args
+            description: "Returns the data on company_states item(s) by searching using arguments entered, allows you to filter which fields are returned",
+            args: { company_state_id: {type: GraphQLString, description: "ID representing the company state"}, company_state_name: {type: GraphQLString, description: "Name of existing company state"}}, //args
             resolve(parent,args) {
                  if(args.company_state_id == undefined) {args.company_state_id = ''} //if no values given for args, sets them to null to avoid 
                  if(args.company_state_name == undefined) {args.company_state_name = ''}//an error being thrown
@@ -63,24 +145,15 @@ const Sequelize = require('sequelize');
                   })                
             }
         },
-        /**
-         * query that returns all companies items in the db
-         * can filter which fields are returned
-         */
-        allcompanies:{
-            type: new GraphQLList(companiestype),
-            args: { id: {type: GraphQLString}}, 
-            resolve(parent,args) {
-                return companies.findAll({})                
-            }
-        }, 
+        
         /**
          * query that allows client to search companies items by company_states_name or company_states_id
          * can filter which fields are returned
          */
         companies: { 
             type: new GraphQLList(companiestype),
-            args: { company_id: {type: GraphQLInt}, company_name: {type: GraphQLString} , company_city: {type: GraphQLString},  company_state: {type: GraphQLString} , company_flag: {type: GraphQLString}}, //args
+            description: "Returns the data on companies item(s) by searching using arguments entered, allows you to filter which fields are returned",
+            args: { company_id: {type: GraphQLInt, description: "ID representing existing company"}, company_name: {type: GraphQLString, description: "Name of existing company"} , company_city: {type: GraphQLString, description: "City where company resides"},  company_state: {type: GraphQLString, description: "State where company resides"} , company_flag: {type: GraphQLString, description: "Three letter code corresponding to the company franchise"}}, //args
             resolve(parent,args) {
                  if(args.company_id == undefined) {args.company_id = -1} //if no values given for args, sets them to null to avoid 
                  if(args.company_name == undefined) {args.company_name = 'Empty'}//an error being thrown
@@ -100,17 +173,7 @@ const Sequelize = require('sequelize');
                   })                
             }
         },
-        /**
-         * query that returns all company_city items in the db
-         * can filter which fields are returned
-         */
-         allcompany_city:{
-            type: new GraphQLList(company_citytype),
-            args: { id: {type: GraphQLString}}, 
-            resolve(parent,args) {
-                return company_city.findAll({})                
-            }
-        },
+        
 
         /**
          * query that allows client to search company_city items by field values
@@ -118,7 +181,8 @@ const Sequelize = require('sequelize');
          */
          company_city: { 
             type: new GraphQLList(company_citytype),
-            args: { company_city_id: {type: GraphQLInt}, company_city_ccc: {type: GraphQLString} , company_city_name: {type: GraphQLString},  company_city_sound: {type: GraphQLString} },  //args
+            description: "Returns the data on company_city item(s) by searching using arguments entered, allows you to filter which fields are returned",
+            args: { company_city_id: {type: GraphQLInt, description: "ID representing existing company_city"}, company_city_ccc: {type: GraphQLString,  description: "Three letter code representing existing a company_city's company_city_name "} , company_city_name: {type: GraphQLString, description: "Name of existing companies city"},  company_city_sound: {type: GraphQLString, description: "Phonetic description of how to say city name"} },  //args
             resolve(parent,args) {
                  if(args.company_city_id == undefined) {args.company_city_id = -1} //if no values given for args, sets them to null to avoid 
                  if(args.company_city_ccc == undefined) {args.company_city_ccc = 'Empty'}//an error being thrown
@@ -140,17 +204,7 @@ const Sequelize = require('sequelize');
             
         },
 
-        /**
-         * query that returns all company_flag items in the db
-         * can filter which fields are returned
-         */
-         allcompany_flag:{
-            type: new GraphQLList(company_flagtype),
-            args: { id: {type: GraphQLString}}, 
-            resolve(parent,args) {
-                return company_flag.findAll({})                
-            }
-        },
+        
 
         /**
          * query that allows client to search company_flag items by field values
@@ -158,7 +212,8 @@ const Sequelize = require('sequelize');
          */
          company_flag: { 
             type: new GraphQLList(company_flagtype),
-            args: { company_flag_id: {type: GraphQLInt}, company_flag_nnn: {type: GraphQLString} , company_flag_name: {type: GraphQLString},  company_flag_franchisor: {type: GraphQLInt},  company_flag_sound: {type: GraphQLString},  company_flag_color: {type: GraphQLString},  company_flag_body: {type: GraphQLString},  company_flag_ad: {type: GraphQLString},  company_flag_css: {type: GraphQLString},  company_flag_terms: {type: GraphQLString} },  //args
+            description: "Returns the data on company_flag item(s) by searching using arguments entered, allows you to filter which fields are returned",
+            args: { company_flag_id: {type: GraphQLInt, description: "Flag ID"}, company_flag_nnn: {type: GraphQLString, description: "Three letter code representing the flag's name"} , company_flag_name: {type: GraphQLString, description: "Flag name"},  company_flag_franchisor: {type: GraphQLInt, description: "Id of franchisor using flag" },  company_flag_sound: {type: GraphQLString, description: "Phonetic description of how to say the flag name"},  company_flag_color: {type: GraphQLString, description: "Flag color in hexadecimal color code"},  company_flag_body: {type: GraphQLString, description: "File representing body of flag"},  company_flag_ad: {type: GraphQLString, description: "Image file representing company_flag"},  company_flag_css: {type: GraphQLString, description: "css code representing company flag"},  company_flag_terms: {type: GraphQLString, description: ".txt file with terms of the flag"} },  //args
             resolve(parent,args) {
                  if(args.company_flag_id == undefined) {args.company_flag_id = -1} //if no values given for args, sets them to null to avoid 
                  if(args.company_flag_nnn== undefined) {args.company_flag_nnn = 'Empty'}//an error being thrown
@@ -191,24 +246,15 @@ const Sequelize = require('sequelize');
         
             
         },
-        /**
-         * query that returns all company_franchisor items in the db
-         * can filter which fields are returned
-         */
-        allcompany_franchisor: {
-            type: new GraphQLList(company_franchisortype),
-            args: { id: {type: GraphQLString}}, 
-            resolve(parent,args) {
-                return company_franchisor.findAll({})                
-            }
-        },
+        
         /**
          * query that allows client to search company_franchisor items by field values
          * can filter which fields are returned
          */
         company_franchisor: { 
             type: new GraphQLList(company_franchisortype),
-            args: { company_franchisor_id: {type: GraphQLInt}, company_franchisor_name: {type: GraphQLString}}, //args
+            description: "Returns the data on company_franchisor item(s) by searching using arguments entered, allows you to filter which fields are returned",
+            args: { company_franchisor_id: {type: GraphQLInt, description: "Franchisor ID "}, company_franchisor_name: {type: GraphQLString, description: "Franchisor name"}}, //args
             resolve(parent,args) {
                  if(args.company_franchisor_id == undefined) {args.company_state_id = -1} //if no values given for args, sets them to null to avoid 
                  if(args.company_franchisor_name == undefined) {args.company_state_name = ''}//an error being thrown
@@ -230,33 +276,15 @@ const Mutation = new GraphQLObjectType({
      name: "Mutation",
     fields: {
         createCompany: {
-            type: company_statestype,
-            args: {
-                compId: {type: GraphQLString},
-                name: {type: GraphQLString},
-                email: {type: GraphQLString},
-                owner: {type: GraphQLString},
-                phoneNumber: {type: GraphQLString},
-                location: {type: GraphQLString}
-            },
+            type: companiestype,
+            args: {},
             resolve(parent,args) {
-                const company = new Company({ //creating new company document
-                    compId: args.compId,
-                    name: args.name,
-                    email: args.email,
-                    owner: args.owner,
-                    phoneNumber: args.phoneNumber,
-                    location: args.location,
-                })
-                //const newCompany =  company.save() //used to have await
-                return args
+                return
             }
-           
         }
     }
  })
 
 const schema = new graphql.GraphQLSchema({query: RootQuery, mutation: Mutation})
 
-//const newSchema = {typedefs, resolvers}
  module.exports = {schema}
