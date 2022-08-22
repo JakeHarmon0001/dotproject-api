@@ -76,7 +76,7 @@ const helpdesk_items = db.sequelize.define(
     item_accounting: { type: INTEGER },
     item_updated: { type: DATE },
     item_zabbix: { type: INTEGER },
-    item_newdb: { type: INTEGER },
+    item_newdp: { type: INTEGER },
   },
   { tableName: "helpdesk_items", timestamps: false }
 );
@@ -143,7 +143,7 @@ const helpdesk_items_archive = db.sequelize.define(
     item_accounting: { type: INTEGER },
     item_updated: { type: DATE },
     item_zabbix: { type: INTEGER },
-    item_newdb: { type: INTEGER },
+    item_newdp: { type: INTEGER },
   },
   { tableName: "helpdesk_items_archive", timestamps: false }
 );
@@ -261,7 +261,7 @@ const helpdesk_item_status_backup = db.sequelize.define(
 const helpdesk_item_watchers = db.sequelize.define(
   "helpdesk_item_watchers",
   {
-    item_id: { type: INTEGER },
+    item_id: { type: INTEGER, primaryKey: true },
     user_id: { type: INTEGER },
     notify: { type: CHAR },
   },

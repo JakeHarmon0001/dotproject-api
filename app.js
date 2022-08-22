@@ -1,9 +1,9 @@
-const express = require("express");
-const app = express();
+
+
 const { createServer } = require("@graphql-yoga/node");
-const { createPool } = require("mariadb");
+
 const db = require("./mysql/db.js");
-const {
+const { // importing models
   companies,
   companiesbackup,
   companiesbackup2,
@@ -24,7 +24,7 @@ const {
   company_states_am,
   company_tags,
 } = require("./models/companies.js");
-const {
+const { // importing models
   helpdesk_items,
   helpdesk_item_status,
   helpdesk_item_status_archive,
@@ -42,9 +42,9 @@ const server = createServer({
 });
 
 
-    helpdesk_items.findAll({}).then(function (helpdesk_items) {
-      console.log("select_data: " + JSON.stringify(helpdesk_items));
-    });
+    //  helpdesk_item_watchers.findAll({}).then(function (helpdesk_item_watchers) {
+    //    console.log("select_data: " + JSON.stringify(helpdesk_item_watchers));
+    //  });
 
 
 server.start();

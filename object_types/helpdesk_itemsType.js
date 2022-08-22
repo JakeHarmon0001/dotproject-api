@@ -74,7 +74,7 @@ const helpdesk_itemstype = new GraphQLObjectType({
     item_accounting: {type: GraphQLInt},
     item_updated: {type: GraphQLString},
     item_zabbix: {type: GraphQLInt},
-    item_newdb: {type: GraphQLInt}
+    item_newdp: {type: GraphQLInt}
     
 })
 })
@@ -135,7 +135,7 @@ const helpdesk_items_archivetype = new GraphQLObjectType({
     item_accounting: {type: GraphQLInt},
     item_updated: {type: GraphQLString},
     item_zabbix: {type: GraphQLInt},
-    item_newdb: {type: GraphQLInt}
+    item_newdp: {type: GraphQLInt}
 })
 })
 
@@ -245,7 +245,7 @@ const helpdesk_item_watcherstype = new GraphQLObjectType({
     fields: () => ({
     item_id: {type: GraphQLInt},
     user_id: {type: GraphQLInt},
-    notify: {type: CHAR}
+    notify: {type: GraphQLString}
 })
 })
 

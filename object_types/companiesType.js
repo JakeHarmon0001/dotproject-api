@@ -13,22 +13,9 @@ const {
   GraphQLList,
 } = graphql;
 
-const { STRING } = require("sequelize");
 
-const { TINYINT } = require("sequelize");
-const { TEXT} = require("sequelize");
-const { DATE } = require("sequelize");
-const { BIGINT} = require("sequelize");
-const { DECIMAL } = require("sequelize");
-const { INTEGER } = require("sequelize");
-const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
-
-const User = db.sequelize.define("User", {
-  username: DataTypes.STRING,
-  birthday: DataTypes.DATE,
-});
 
 const CompanyType = new GraphQLObjectType({ //company object type
   name: "Company",
@@ -421,8 +408,8 @@ const company_field_techstype = new GraphQLObjectType({
     ft_available_days: { type: GraphQLInt },
     ft_available_hours_weekday: { type: GraphQLString },
     ft_available_hours_weekend: { type: GraphQLString },
-    ft_hourly_rate_weekday: { type: DECIMAL },
-    ft_hourly_rate_weekend: { type: DECIMAL },
+    ft_hourly_rate_weekday: { type: GraphQLInt },
+    ft_hourly_rate_weekend: { type: GraphQLInt },
     ft_notes: { type: GraphQLString },
   })
 })
@@ -482,8 +469,8 @@ const company_locktype = new GraphQLObjectType({
   lockedFlag: { type: GraphQLInt },
   lockedUser: { type: GraphQLInt },
   lockedMessage: { type: GraphQLString },
-  createdAt: { type: TIME },
-  modifiedAt: { type: TIME },
+  createdAt: { type: GraphQLString },
+  modifiedAt: { type: GraphQLString },
 })
 })
 const company_phonetype = new GraphQLObjectType({
