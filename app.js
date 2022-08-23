@@ -23,7 +23,7 @@ const { // importing models
   company_states,
   company_states_am,
   company_tags,
-} = require("./models/companies.js");
+} = require("./models/index.js");
 const { // importing models
   helpdesk_items,
   helpdesk_item_status,
@@ -34,7 +34,7 @@ const { // importing models
   helpdesk_items_archive,
   helpdesk_items_attach,
   helpdesk_items_backup,
-} = require("./models/helpdesk_items");
+} = require("./models/modhelpdesk_items");
 
 const {schema} = require("./schemas/schema_companies.js") //schema for companies/related querys  
 const server = createServer({
@@ -42,9 +42,9 @@ const server = createServer({
 });
 
 
-    //  helpdesk_item_watchers.findAll({}).then(function (helpdesk_item_watchers) {
-    //    console.log("select_data: " + JSON.stringify(helpdesk_item_watchers));
-    //  });
+      // companies.findAll({}).then(function (companies) {
+      //   console.log("select_data: " + JSON.stringify(companies));
+      // });
 
 
 server.start();

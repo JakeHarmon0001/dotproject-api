@@ -31,9 +31,6 @@ const Sequelize = require('sequelize');
     company_states,
     company_states_am,
     company_tags,
-  } = require("../models/companies.js");
-
-  const {
     helpdesk_items,
     helpdesk_item_status,
     helpdesk_item_status_archive,
@@ -42,10 +39,8 @@ const Sequelize = require('sequelize');
     helpdesk_items_additional,
     helpdesk_items_archive,
     helpdesk_items_attach,
-    helpdesk_items_backup,
-  } = require("../models/helpdesk_items");
-  
-
+    helpdesk_items_backup
+  } = require("../models/index.js");
 
   const RootQuery = new GraphQLObjectType ({
     name: "RootQuery",
@@ -557,7 +552,7 @@ const Sequelize = require('sequelize');
                     }
                   })                
             }
-        },
+        }
 
         
     }
