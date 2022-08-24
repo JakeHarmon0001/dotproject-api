@@ -20,13 +20,13 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_assigned_field_tech = db.sequelize.define(
-    "company_assigned_field_tech",
-    {
-      ft_id: { type: INTEGER },
-      company_id: { type: INTEGER, primaryKey: true },
-      primary_tech: { type: TINYINT, primaryKey: true },
-    },
-    { tableName: "company_assigned_field_tech", timestamps: false }
-  )
+  "company_assigned_field_tech",
+  {
+    ft_id: { type: INTEGER },
+    company_id: { type: INTEGER, primaryKey: true },
+    primary_tech: { type: TINYINT, primaryKey: true },
+  },
+  { tableName: "company_assigned_field_tech", timestamps: false }
+)
 
-  module.exports = {company_assigned_field_tech}
+module.exports = { company_assigned_field_tech }

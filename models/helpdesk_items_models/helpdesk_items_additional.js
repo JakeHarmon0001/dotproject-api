@@ -21,13 +21,13 @@ const { FLOAT } = require("sequelize");
 const { CHAR } = require("sequelize");
 
 const helpdesk_items_additional = db.sequelize.define(
-    "helpdesk_items_additional",
-    {
-      add_item_id: { type: INTEGER, primaryKey: true },
-      add_item_type: { type: INTEGER, primaryKey: true },
-      add_item_value: { type: STRING }
-    },
-    { tableName: "helpdesk_items_additional", timestamps: false }
-  );
+  "helpdesk_items_additional",
+  {
+    add_item_id: { type: INTEGER, primaryKey: true },
+    add_item_type: { type: INTEGER, primaryKey: true },
+    add_item_value: { type: STRING }
+  },
+  { tableName: "helpdesk_items_additional", timestamps: false }
+);
 
-module.exports = {helpdesk_items_additional}
+module.exports = { helpdesk_items_additional }

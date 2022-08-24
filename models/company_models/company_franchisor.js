@@ -20,17 +20,17 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_franchisor = db.sequelize.define(
-    "company_franchisor",
-    {
-      company_franchisor_id: {
-        type: INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      company_franchisor_name: { type: STRING },
+  "company_franchisor",
+  {
+    company_franchisor_id: {
+      type: INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    { tableName: "company_franchisor", timestamps: false }
-  )
-  
+    company_franchisor_name: { type: STRING },
+  },
+  { tableName: "company_franchisor", timestamps: false }
+)
 
-  module.exports = {company_franchisor}
+
+module.exports = { company_franchisor }

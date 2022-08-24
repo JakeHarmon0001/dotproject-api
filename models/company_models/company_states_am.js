@@ -20,12 +20,12 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_states_am = db.sequelize.define(
-    "company_states_am",
-    {
-      company_state_id: { type: STRING },
-      company_state_am: { type: INTEGER },
-    },
-    { tableName: "company_states_am", timestamps: false }
-  )
+  "company_states_am",
+  {
+    company_state_id: { type: STRING },
+    company_state_am: { type: INTEGER },
+  },
+  { tableName: "company_states_am", timestamps: false }
+)
 
-  module.exports = {company_states_am}
+module.exports = { company_states_am }

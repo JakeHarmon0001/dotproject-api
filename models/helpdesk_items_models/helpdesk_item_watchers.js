@@ -21,13 +21,13 @@ const { FLOAT } = require("sequelize");
 const { CHAR } = require("sequelize");
 
 const helpdesk_item_watchers = db.sequelize.define(
-    "helpdesk_item_watchers",
-    {
-      item_id: { type: INTEGER, primaryKey: true },
-      user_id: { type: INTEGER },
-      notify: { type: CHAR },
-    },
-    { tableName: "helpdesk_item_watchers", timestamps: false }
-  );
-  
-module.exports = {helpdesk_item_watchers}
+  "helpdesk_item_watchers",
+  {
+    item_id: { type: INTEGER, primaryKey: true },
+    user_id: { type: INTEGER },
+    notify: { type: CHAR },
+  },
+  { tableName: "helpdesk_item_watchers", timestamps: false }
+);
+
+module.exports = { helpdesk_item_watchers }

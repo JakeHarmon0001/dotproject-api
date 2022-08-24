@@ -237,7 +237,7 @@ const companiesbackuptype = new GraphQLObjectType({
     company_reseller: { type: GraphQLInt },
   })
 })
-const companiesbackup2 = db.sequelize.define(
+const companiesbackup2type = db.sequelize.define(
   "companies-backup",
   {
     //company object type

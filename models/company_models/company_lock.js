@@ -20,15 +20,15 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_lock = db.sequelize.define("company_lock", {
-    id: { type: INTEGER, autoIncrement: true, primaryKey: true },
-    company_id: { type: INTEGER },
-    lockedFlag: { type: TINYINT },
-    lockedUser: { type: INTEGER },
-    lockedMessage: { type: STRING },
-    createdAt: { type: TIME },
-    modifiedAt: { type: TIME },
-  },
+  id: { type: INTEGER, autoIncrement: true, primaryKey: true },
+  company_id: { type: INTEGER },
+  lockedFlag: { type: TINYINT },
+  lockedUser: { type: INTEGER },
+  lockedMessage: { type: STRING },
+  createdAt: { type: TIME },
+  modifiedAt: { type: TIME },
+},
   { tableName: "company_lock", timestamps: false })
-  
 
-  module.exports = {company_lock}
+
+module.exports = { company_lock }

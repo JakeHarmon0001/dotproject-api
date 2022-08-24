@@ -77,4 +77,4 @@ const helpdesk_items = db.sequelize.define(
   { tableName: "helpdesk_items", timestamps: false }
 );
 
-module.exports = {helpdesk_items}
+module.exports = { helpdesk_items }

@@ -20,14 +20,14 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_allview = db.sequelize.define(
-    "company_allview",
-    {
-      allview_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-      allview_company_id: { type: INTEGER },
-      allview_uid: { type: STRING },
-    },
-    { tableName: "company_allview", timestamps: false }
-  )
-  
+  "company_allview",
+  {
+    allview_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    allview_company_id: { type: INTEGER },
+    allview_uid: { type: STRING },
+  },
+  { tableName: "company_allview", timestamps: false }
+)
 
-  module.exports = {company_allview}
+
+module.exports = { company_allview }

@@ -20,14 +20,14 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_city = db.sequelize.define(
-    "company_city",
-    {
-      company_city_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-      company_city_ccc: { type: STRING },
-      company_city_name: { type: STRING },
-      company_city_sound: { type: STRING },
-    },
-    { tableName: "company_city", timestamps: false }
-  )
+  "company_city",
+  {
+    company_city_id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    company_city_ccc: { type: STRING },
+    company_city_name: { type: STRING },
+    company_city_sound: { type: STRING },
+  },
+  { tableName: "company_city", timestamps: false }
+)
 
-  module.exports = {company_city}
+module.exports = { company_city }

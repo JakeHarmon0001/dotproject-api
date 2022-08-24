@@ -20,14 +20,14 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_reseller = db.sequelize.define(
-    "company_reseller",
-    {
-      reseller_id: { type: INTEGER, primaryKey: true },
-      reseller_name: { type: STRING },
-      reseller_phone: { type: STRING },
-      reseller_email: { type: STRING },
-    },
-    { tableName: "company_reseller", timestamps: false }
-  )
+  "company_reseller",
+  {
+    reseller_id: { type: INTEGER, primaryKey: true },
+    reseller_name: { type: STRING },
+    reseller_phone: { type: STRING },
+    reseller_email: { type: STRING },
+  },
+  { tableName: "company_reseller", timestamps: false }
+)
 
-  module.exports = {company_reseller}
+module.exports = { company_reseller }

@@ -20,13 +20,13 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_additional = db.sequelize.define(
-    "company_additional",
-    {
-      add_company_id: { type: INTEGER, primaryKey: true },
-      add_item_type: { type: INTEGER, primaryKey: true },
-      add_item_value: { type: STRING },
-    },
-    { tableName: "company_additional", timestamps: false }
-  )
+  "company_additional",
+  {
+    add_company_id: { type: INTEGER, primaryKey: true },
+    add_item_type: { type: INTEGER, primaryKey: true },
+    add_item_value: { type: STRING },
+  },
+  { tableName: "company_additional", timestamps: false }
+)
 
-  module.exports = {company_additional}
+module.exports = { company_additional }

@@ -21,16 +21,16 @@ const { FLOAT } = require("sequelize");
 const { CHAR } = require("sequelize");
 
 const helpdesk_item_status_backup = db.sequelize.define(
-    "helpdesk_item_status_backup",
-    {
-      status_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
-      status_item_id: { type: INTEGER },
-      status_code: { type: TINYINT },
-      status_date: { type: STRING },
-      status_modified_by: { type: INTEGER },
-      status_comment: { type: TEXT },
-    },
-    { tableName: "helpdesk_item_status_archive", timestamps: false }
-  );
-  
-module.exports = {helpdesk_item_status_backup}
+  "helpdesk_item_status_backup",
+  {
+    status_id: { type: INTEGER, autoIncrement: true, primaryKey: true },
+    status_item_id: { type: INTEGER },
+    status_code: { type: TINYINT },
+    status_date: { type: STRING },
+    status_modified_by: { type: INTEGER },
+    status_comment: { type: TEXT },
+  },
+  { tableName: "helpdesk_item_status_archive", timestamps: false }
+);
+
+module.exports = { helpdesk_item_status_backup }

@@ -20,21 +20,21 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const { TIME } = require("sequelize");
 
 const company_liscenses = db.sequelize.define(
-    "company_liscenses",
-    {
-      licenses_id: {
-        type: INTEGER,
-        unique: true,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      company_id: { type: INTEGER },
-      item_id: { type: INTEGER },
-      purchase_date: { type: DATE },
-      start_date: { type: DATE },
-      licenses_months: { type: INTEGER, unique: true },
+  "company_liscenses",
+  {
+    licenses_id: {
+      type: INTEGER,
+      unique: true,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    { tableName: "company_liscenses", timestamps: false }
-  )
+    company_id: { type: INTEGER },
+    item_id: { type: INTEGER },
+    purchase_date: { type: DATE },
+    start_date: { type: DATE },
+    licenses_months: { type: INTEGER, unique: true },
+  },
+  { tableName: "company_liscenses", timestamps: false }
+)
 
-  module.exports = {company_liscenses}
+module.exports = { company_liscenses }
