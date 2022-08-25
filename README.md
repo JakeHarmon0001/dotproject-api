@@ -37,3 +37,6 @@ To add more db tables you must create more sequelize models and graphql object t
 
 This makes the basic structure to create a graphql api is like the following:
 connect to your db --> create models and graphql object types of your tables --> construct a schema using the following --> export that schema into app.js and use it in the const 'server'
+
+To generate documentation run the command: npx spectaql config.yml
+To tweak documentation settings everything is located in the public folder 
