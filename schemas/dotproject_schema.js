@@ -384,8 +384,8 @@ const RootQuery = new GraphQLObjectType({
       description: "Returns the data on company_franchisor item(s) by searching using arguments entered, allows you to filter which fields are returned",
       args: { company_franchisor_id: { type: GraphQLInt, description: "Franchisor ID " }, company_franchisor_name: { type: GraphQLString, description: "Franchisor name" } }, //args
       resolve(parent, args) {
-        if (args.company_franchisor_id == undefined) { args.company_state_id = -1 } //if no values given for args, sets them to null to avoid 
-        if (args.company_franchisor_name == undefined) { args.company_state_name = '' }//an error being thrown
+        if (args.company_franchisor_id == undefined) { args.company_franchisor_id = -1 } //if no values given for args, sets them to null to avoid 
+        if (args.company_franchisor_name == undefined) { args.company_franchisor_name = '' }//an error being thrown
         return company_franchisor.findAll({ //returns items found in the db
           where: {
             [Sequelize.Op.or]: [
