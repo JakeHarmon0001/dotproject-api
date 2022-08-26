@@ -1,3 +1,6 @@
+/**
+ * graphql object type of the company_field_techstype table
+ */
 const db = require("../../mysql/db.js"); //database variable
 const graphql = require("graphql");
 const {

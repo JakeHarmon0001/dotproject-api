@@ -4,6 +4,7 @@ The graphql object types are stored in the ./object_types folder
 The sequelize models are stored in the ./models folder
 The schema is found in the schema folder and alllows the client to request data on several companies related tables and all helpdeak_items related tables by either requesting all items in the tables or searching for one specific item based on certain arguments
 All querys are able to be filtered based on which fields you want to have returned
+This api uses the URL: http://0.0.0.0:4000/graphql
 
 The DB must be set up with a config.json file in a with the structure :
 {
@@ -39,4 +40,4 @@ This makes the basic structure to create a graphql api is like the following:
 connect to your db --> create models and graphql object types of your tables --> construct a schema using the following --> export that schema into app.js and use it in the const 'server'
 
 To generate documentation run the command: npx spectaql config.yml
-To tweak documentation settings everything is located in the public folder 
+To tweak documentation settings, everything is located in the public folder 

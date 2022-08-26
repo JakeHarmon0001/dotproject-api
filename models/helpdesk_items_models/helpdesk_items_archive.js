@@ -1,3 +1,6 @@
+/**
+ * model for helpdesk_items_archive table
+ */
 const db = require("../../mysql/db.js"); //database variable
 const graphql = require("graphql");
 const {

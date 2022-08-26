@@ -1,3 +1,6 @@
+/**
+ * model for company_advn table
+ */
 const db = require("../../mysql/db.js"); //database variable
 const graphql = require("graphql");
 const {

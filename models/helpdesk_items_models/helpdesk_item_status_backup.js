@@ -1,3 +1,6 @@
+/**
+ * model for helpdesk_item_status_backup table
+ */
 const db = require("../../mysql/db.js"); //database variable
 const graphql = require("graphql");
 const {

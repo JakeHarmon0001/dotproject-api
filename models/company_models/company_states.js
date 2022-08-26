@@ -1,3 +1,6 @@
+/**
+ * model for company_states table
+ */
 const db = require("../../mysql/db.js"); //database variable
 const graphql = require("graphql");
 const {

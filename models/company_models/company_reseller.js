@@ -1,3 +1,6 @@
+/**
+ * model for company_reseller table
+ */
 const db = require("../../mysql/db.js"); //database variable
 const graphql = require("graphql");
 const {
